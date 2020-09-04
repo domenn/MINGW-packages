@@ -12,6 +12,7 @@ url="https://www.gtk.org/"
 arch=('any')
 pkgdesc="Common C routines used by GTK+ 3 and other libs (mingw-w64)"
 license=(LGPL2)
+options=(!strip debug)
 install=glib2-${CARCH}.install
 depends=("${MINGW_PACKAGE_PREFIX}-gcc-libs"
          "${MINGW_PACKAGE_PREFIX}-gettext"
@@ -58,7 +59,7 @@ build() {
   mkdir "${srcdir}"/build-${CARCH}-static && cd "${srcdir}"/build-${CARCH}-static
 
   meson \
-    --buildtype=plain \
+    --buildtype=debug \
     --default-library=static \
     -Dforce_posix_threads=true \
     "../glib-${pkgver}"
@@ -69,7 +70,7 @@ build() {
   mkdir "${srcdir}"/build-${CARCH}-shared && cd "${srcdir}"/build-${CARCH}-shared
 
   meson \
-    --buildtype=plain \
+    --buildtype=debug \
     -Ddefault_library=shared \
     -Dman=true \
     -Dforce_posix_threads=true \
