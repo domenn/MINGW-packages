@@ -30,7 +30,8 @@ source=("https://download.gnome.org/sources/glib/${pkgver%.*}/glib-${pkgver}.tar
         glib-compile-schemas.hook.in
         gio-querymodules.hook.in
         0002-disable_glib_compile_schemas_warning.patch
-        pyscript2exe.py)
+        pyscript2exe.py
+        glib-2-52.diff)
 sha256sums=('9cbd5bd2715ead1c28d53c46f7b7b6ff6166f5887b772c1a9e3bf2910cfecc11'
             '51d02360a1ee978fd45e77b84bca9cfbcf080d91986b5c0efe0732779c6a54ec'
             '1e3ac7cfd4644f3849704e54fcfbb12d15440a33cd5c2d014d4a479c6aaab185'
@@ -38,7 +39,8 @@ sha256sums=('9cbd5bd2715ead1c28d53c46f7b7b6ff6166f5887b772c1a9e3bf2910cfecc11'
             '0c3d54636407e0e13429b73959cace626253cd772e1d4870de0fb92b0b99545a'
             'f18d27d98709dba8c5f9756672baaf0158fb4353c9edbdc2e80021f88ff34ced'
             '396c25cfd740ffbb72209133c7b9453173167577265a4bb14502678de8d5a8f9'
-            '00e03a8b9d45e620c6fabbf96f5ccb41d1e49cc9b35ccb846d423f235ad5bec6')
+            '00e03a8b9d45e620c6fabbf96f5ccb41d1e49cc9b35ccb846d423f235ad5bec6'
+            'cff5e002aebb4f366b1ca5589e3ed5ab2f9179438ca6f9114df3da9a0b9376fc')
 
 prepare() {
   cd "${srcdir}/glib-${pkgver}"
@@ -47,6 +49,7 @@ prepare() {
   patch -Np1 -i "${srcdir}"/0001-win32-Make-the-static-build-work-with-MinGW-when-pos.patch
   patch -Np1 -i "${srcdir}"/0001-disable-some-tests-when-static.patch
   patch -Np1 -i "${srcdir}"/0002-disable_glib_compile_schemas_warning.patch
+  patch -Np1 -i "${srcdir}"/glib-2-52.diff
 }
 
 build() {
